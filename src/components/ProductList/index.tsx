@@ -25,7 +25,7 @@ const ProductList: Component<Props> = (props: Props) => {
 
     return (
         <div class="m-4">
-            <div class='grid grid-cols-1 gap-y-6 gap-x-2 lg:grid-cols-3 xl:gap-x-6'>
+            <div class='grid grid-cols-1 gap-y-8 gap-x-2 lg:grid-cols-3 xl:gap-x-8'>
                 <For each={products()} fallback={<Loader />}>
                     {
                         (product: Product) => (

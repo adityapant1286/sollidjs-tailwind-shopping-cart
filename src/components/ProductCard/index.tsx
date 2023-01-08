@@ -1,4 +1,5 @@
 import type { Component } from "solid-js";
+import { Link } from "@solidjs/router";
 import { Product } from "../../models";
 import AddToCart from "../AddToCart";
 import Box from "../Box";
@@ -21,33 +22,37 @@ const identifyVariant = (rate: number) =>
 const ProductCard: Component<Props> = (props: Props) => (
 
     <Box id={`product-${props.product.id.toString()}`}
-        width={props.width ?? "w-full"}>
+        width={props.width ?? "w-full"} height="h-full">
         <div class="flex h-full">
             <div class="bg-white px-3 rounded-tl-2xl rounded-bl-2xl">
                 <Image src={props.product.image} alt={props.product.title}
                 />
             </div>
-            <div class="flex flex-col justify-between w-full">
+            <div class="flex flex-col justify-between w-full p-3">
                 <div>
                     <TextWithPrice text={props.product.title} price={props.product.price} />
-                    <p class="my-3 mx-5 line-clamp-5 text-base text-slate-800 dark:text-slate-100">
-                        {props.product.description}
-                    </p>
+                    <Link href={`/products/${props.product.id}`}>
+                        <p class="my-3 mx-5 line-clamp-5 text-base text-slate-800 dark:text-slate-100">
+                            {props.product.description}
+                        </p>
+                    </Link>
                 </div>
-                <div>
+                <div class="flex flex-col md:flex-row justify-between m-3">
                     <TextWithBadge text={props.product.category}
                         variant={identifyVariant(props.product.rating.rate)}
                         count={props.product.rating.count}
-                        spacing="m-3"
+                        spacing="m-2 md:m-0"
                     />
-                    <div class="mx-5 mb-7 mt-3">
+                    <div >
                         <AddToCart item={
                             {
                                 id: props.product.id,
                                 title: props.product.title,
                                 price: props.product.price,
                                 quantity: 1
-                            }} />
+                            }
+                        }
+                            spacing="min-w-[100px]" />
                     </div>
                 </div>
             </div>

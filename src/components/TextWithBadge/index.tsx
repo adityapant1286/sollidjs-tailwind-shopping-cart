@@ -7,6 +7,7 @@ interface Props {
     count?: number;
     variant: "full" | "half" | "empty";
     spacing?: string;
+    textSize?: string;
 }
 
 const wrapperClasses = [
@@ -15,9 +16,13 @@ const wrapperClasses = [
     "text-slate-500 dark:text-slate-50"
 ];
 
+const textClasses = [
+    "mr-1"
+];
+
 const TextWithBadge: Component<Props> = (props: Props) => (
     <div class={unifyClasses(wrapperClasses, [props.spacing ?? ""])}>
-        <span class="mr-1">{props.text}</span>
+        <span class={unifyClasses(textClasses, [props.textSize ?? ""])}>{props.text}</span>
         <BadgeStar count={props.count} variant={props.variant} starTwSize="w-6 h-6" />
     </div>
 );

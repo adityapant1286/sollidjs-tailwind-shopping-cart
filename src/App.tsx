@@ -1,34 +1,19 @@
-import type { Component } from 'solid-js';
+import { Component, lazy } from 'solid-js';
+import { Route, Routes } from '@solidjs/router';
+
 import Header from './components/Header';
-import ProductList from './components/ProductList';
-
-const cartItem = {
-  id: 1,
-  title: "test",
-  price: 9.99,
-  quantity: 1
-};
-
-const product = {
-  id: 1,
-  title: "test",
-  description: "desc",
-  price: 9.99,
-  category: "Category",
-  image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-  rating: {
-    rate: 2.6,
-    count: 1
-  }
-};
-
+import ProductDetails from './components/ProductDetails';
+const ProductList = lazy(() => import('./components/ProductList'));
 
 
 const App: Component = () => {
   return (
     <div>
       <Header />
-      <ProductList />
+      <Routes>
+        <Route path="/" component={ProductList}></Route>
+        <Route path="/products/:id" element={<ProductDetails />}></Route>
+      </Routes>
     </div>
   );
 };
